@@ -3,13 +3,7 @@
 Aplicación web desarrollada para gestionar pedidos en un local de comida, implementando el ciclo de vida del software con metodología ágil.
 
 ##  Funcionalidades 
- Crear pedidos con nombre de cliente y productos
- Calcular el total automáticamente
- Visualizar la lista de pedidos
- Cambiar el estado del pedido:
-  Pendiente
-  En preparación
-  Entregado
+ Crear pedidos con nombre de cliente y productos,calcular el total automáticamente,visualizar la lista de pedidos, cambiar el estado del pedido: Pendiente , en preparación, entregado
 
 
 ##  Tecnologías utilizada 
