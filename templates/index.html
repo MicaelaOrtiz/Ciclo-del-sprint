@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedidos</title>
+</head>
+<body>
+
+<h1>Sistema de pedidos</h1>
+
+<button onclick="crearPedido()">Crear pedido</button>
+<button onclick="verPedidos()">Ver pedidos</button>
+
+<h2>Cambiar estado de pedido</h2>
+
+<input type="number" id="pedidoIndex" placeholder="Índice del pedido (0,1,2...)">
+<select id="nuevoEstado">
+    <option value="Pendiente">Pendiente</option>
+    <option value="En preparación">En preparación</option>
+    <option value="Entregado">Entregado</option>
+</select>
+
+<button onclick="cambiarEstado()">Cambiar estado</button>
+<pre id="output"></pre>
+
+<script>
+function crearPedido() {
+    fetch('/pedidos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            cliente: "Micaela",
+            productos: [
+                { nombre: "Hamburguesa", precio: 1000 },
+                { nombre: "Papas", precio: 500 }
+            ]
+        })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data));
+}
+
+function verPedidos() {
+    fetch('/pedidos')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    });
+}
+function cambiarEstado() {
+    const index = document.getElementById("pedidoIndex").value;
+    const estado = document.getElementById("nuevoEstado").value;
+
+    fetch(`/pedidos/${index}/estado`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ estado: estado })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        alert("Estado actualizado");
+    });
+}
+</script>
+
+</body>
+</html>
